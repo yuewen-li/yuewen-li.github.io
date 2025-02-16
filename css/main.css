@@ -41,3 +41,10 @@ ul.posts {
 ul.posts li {
     list-style: none;
 }
+
+li img {
+    height: 400px;
+    width: 600px;
+    display: flex;
+    margin-right: 10px;
+  }
