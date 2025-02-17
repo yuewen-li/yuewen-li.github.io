@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Travel Map</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body { font-family: 'Helvetica', 'Arial', 'Sans-Serif'; text-align: center; }
+        #map { height: 600px; width: 80%; margin: auto; }
+        nav ul li { display: inline; margin: 10px; }
+        nav ul li a { text-decoration: none; font-size: 18px; color: #999; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="index.html" class="fa fa-home" style="font-size:24px"></a></li>
+    </ul>
+</nav>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map', {
+        center: [20, 0],
+        zoom: 2,
+        minZoom: 2,
+        maxBounds: [[-90, -180], [90, 180]], 
+        maxBoundsViscosity: 1.0 
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+        noWrap: true 
+    }).addTo(map);
+
+    var visitedCountries = ["USA", "FRA", "JPN", "PRT", "DEU", "ITA", "CHN", "BGR", "PHL", "GBR", "ISL", "CHE", "ESP", "THA"]; 
+
+    fetch("countries.geojson")
+        .then(response => response.json())
+        .then(data => {
+            L.geoJSON(data, {
+                style: function(feature) {
+                    var countryCode = feature.properties.ISO_A3;
+                    return {
+                        fillColor: visitedCountries.includes(countryCode) ? "green" : "gray",
+                        weight: 1,
+                        color: "black",
+                        fillOpacity: visitedCountries.includes(countryCode) ? 0.5 : 0.3
+                    };
+                },
+                onEachFeature: function(feature, layer) {
+                    var countryCode = feature.properties.ISO_A3;
+                    
+                    // Add hover effect (change color on mouseover)
+                    layer.on({
+                        mouseover: function(e) {
+                            var layer = e.target;
+                            layer.setStyle({
+                                fillColor: "green", // Highlight color on hover
+                                fillOpacity: 0.8
+                            });
+                        },
+                        mouseout: function(e) {
+                            var layer = e.target;
+                            layer.setStyle({
+                                fillColor: visitedCountries.includes(countryCode) ? "green" : "gray",
+                                fillOpacity: visitedCountries.includes(countryCode) ? 0.5 : 0.3
+                            });
+                        },
+                        click: function(e) {
+                            // Redirect to a gallery page based on country
+                            var countryName = feature.properties.ADMIN; // Get the country name
+                            var encodedCountryName = encodeURIComponent(countryName); // Encode the country name
+                            window.location.href = "gallery.html?country=" + encodedCountryName; // Redirect to gallery page
+                        }
+                    });
+                }
+            }).addTo(map);
+        })
+        .catch(error => console.error("Error loading GeoJSON:", error));
+</script>
+
+</body>
+</html>
