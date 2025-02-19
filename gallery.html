@@ -30,66 +30,76 @@
         // Example image paths for different countries
         var galleries = {
             "France": [
-                "img/France/1.JPG",
-                "img/France/2.jpg",
-                "img/France/3.jpg",
-                "img/France/4.jpg",
-                "img/France/5.jpg",
-                "img/France/6.JPG"
+                {src: "img/France/1.JPG", text: "Le Chateau de Chenonceau. This is a castle over a river. We visited it during our cycling trip in the Loire Valley."},
+                {src: "img/France/2.jpg", text: "Nice"},
+                {src: "img/France/3.jpg", text: "Nice at night"},
+                {src: "img/France/4.jpg", text: "Basilique du Sacre-Coeur de Montmartre"},
+                {src: "img/France/5.jpg", text: ""},
+                {src: "img/France/6.JPG", text: "Crepe with caramel sauce"}
             ],
             "Portugal": [
-                "img/Portugal/1.JPG",
-                "img/Portugal/2.JPG",
-                "img/Portugal/3.JPG"
+                {src: "img/Portugal/1.JPG", text: "Lagos, Algarve"},
+                {src: "img/Portugal/2.JPG", text: "Sao Vicente"},
+                {src: "img/Portugal/3.JPG", text: "We visited a port producer in Duoro Valley. This is a lovely view of the valley through a window."}
             ],
             "Japan": [
-                "img/Japan/1.JPG",
-                "img/Japan/2.JPG",
-                "img/Japan/3.JPG",
-                "img/Japan/4.JPG",
-                "img/Japan/5.JPG",
-                "img/Japan/6.JPG"
+                {src: "img/Japan/1.JPG", text: ""},
+                {src: "img/Japan/2.JPG", text: ""},
+                {src: "img/Japan/3.JPG", text: ""},
+                {src: "img/Japan/4.JPG", text: ""},
+                {src: "img/Japan/5.JPG", text: ""},
+                {src: "img/Japan/6.JPG", text: ""}
             ],
             "Italy": [
-                "img/Italy/1.JPG",
-                "img/Italy/2.JPG",
-                "img/Italy/3.JPG"
+                {src: "img/Italy/1.JPG", text: "Well people say, when in Rome, do what tourists do. So here we are, Trevi Fountain."},
+                {src: "img/Italy/2.JPG", text: "Colosseo"},
+                {src: "img/Italy/3.JPG", text: "Colosseo at night. Felt like I was walking in the film La Grande Bellezza."}
             ],
             "United States of America": [
-                "img/United States of America/1.JPG",
-                "img/United States of America/2.jpg",
-                "img/United States of America/3.JPG"
+                {src: "img/United States of America/1.JPG", text: "We saw a lot of 6 toed cats at the Hemingway Museum in Key West."},
+                {src: "img/United States of America/2.jpg", text: "I learned about the differences between alligators and crocodiles. I kid you not this is an alligator."},
+                {src: "img/United States of America/3.JPG", text: "What a beautiful sunset!"}
             ],
             "Philippines": [
-                "img/Philippines/1.jpg",
-                "img/Philippines/2.jpg",
-                "img/Philippines/3.jpg"
+                {src: "img/Philippines/1.jpg", text: ""},
+                {src: "img/Philippines/2.jpg", text: ""},
+                {src: "img/Philippines/3.jpg", text: ""}
             ],
             "Iceland": [
-                "img/Iceland/1.jpg",
-                "img/Iceland/2.jpg",
-                "img/Iceland/3.jpg"
+                {src: "img/Iceland/1.jpg", text: ""},
+                {src: "img/Iceland/2.jpg", text: ""},
+                {src: "img/Iceland/3.jpg", text: ""}
             ],
             "Spain": [
-                "img/Spain/1.jpg",
-                "img/Spain/2.jpg",
+                {src: "img/Spain/1.jpg", text: ""},
+                {src: "img/Spain/2.jpg", text: ""},
             ],
             "United Kingdom": [
-                "img/United Kingdom/1.JPG",
-                "img/United Kingdom/2.JPG",
-                "img/United Kingdom/3.JPG",
-                "img/United Kingdom/4.JPG",
-                "img/United Kingdom/5.JPG",
-                "img/United Kingdom/6.JPG",
-                "img/United Kingdom/7.JPG",
-                "img/United Kingdom/8.JPG",
-                "img/United Kingdom/9.JPG"
+                {src: "img/United Kingdom/0.JPG", text: "About to land at London Heathrow, throught the window I could see the sun about to rise above the horizon. Little did I know that was the start of a new adventure."},
+                {src: "img/United Kingdom/1.JPG", text: ""},
+                {src: "img/United Kingdom/2.JPG", text: ""},
+                {src: "img/United Kingdom/3.JPG", text: ""},
+                {src: "img/United Kingdom/4.JPG", text: ""},
+                {src: "img/United Kingdom/5.JPG", text: ""},
+                {src: "img/United Kingdom/6.JPG", text: ""},
+                {src: "img/United Kingdom/7.JPG", text: ""},
+                {src: "img/United Kingdom/8.JPG", text: ""},
+                {src: "img/United Kingdom/9.JPG", text: ""},
             ],
             "Germany": [
-                "img/Germany/1.JPG",
-                "img/Germany/2.JPG",
-                "img/Germany/3.JPG",
-                "img/Germany/4.JPG",
+                {src: "img/Germany/1.JPG", text: ""},
+                {src: "img/Germany/2.JPG", text: ""},
+                {src: "img/Germany/3.JPG", text: ""},
+                {src: "img/Germany/4.JPG", text: ""},
+            ],
+            "China": [
+                {src: "img/China/1.JPG", text: "Terracotta Army"},
+                {src: "img/China/2.JPG", text: "Chong Qing"},
+                {src: "img/China/3.JPG", text: "Hong Kong"},
+                {src: "img/China/5.JPG", text: "Ice scupture in Harbin"},
+                {src: "img/China/6.JPG", text: "Jing Shan, Beijing. From the top of the hill you can get a (good?) view of the Forbidden city."},
+                {src: "img/China/7.JPG", text: "A rafting trip in Kunming, Yunnan."},
+                {src: "img/China/8.JPG", text: ""},
             ]
             // Add more countries and images here as needed
         };
@@ -97,17 +107,22 @@
         // Populate gallery based on the country
         var galleryContainer = document.getElementById('gallery');
         if (galleries[country]) {
-            galleries[country].forEach(imageUrl => {
-                var imgElement = document.createElement('img');
-                imgElement.src = imageUrl;
-                imgElement.classList.add('gallery-item');
+            galleries[country].forEach(imageData => {
+            let divElement = document.createElement('div');
+            divElement.classList.add('gallery-item');
 
-                var divElement = document.createElement('div');
-                divElement.classList.add('gallery-item');
-                divElement.appendChild(imgElement);
+            let imgElement = document.createElement('img');
+            imgElement.src = imageData.src;
+            imgElement.alt = imageData.text;
 
-                galleryContainer.appendChild(divElement);
-            });
+            let overlay = document.createElement('div');
+            overlay.classList.add('overlay');
+            overlay.textContent = imageData.text;
+
+            divElement.appendChild(imgElement);
+            divElement.appendChild(overlay);
+            galleryContainer.appendChild(divElement);
+        });
         } else {
             galleryContainer.innerHTML = "<p>No images available for this country...yet</p>";
         }
