@@ -28,6 +28,12 @@ h2 {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
     text-align: center;
 }
+h3 {
+    font-size: 1.25em;
+    font-family:'Helvetica', 'Arial', 'Sans-Serif';
+    text-align: center;
+    color: #747171;
+}
 p {
     font-size: 1.5em;
     line-height: 1.4em;
