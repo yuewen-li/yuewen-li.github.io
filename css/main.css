@@ -95,19 +95,13 @@ li img {
     padding: 5px;
     margin: 0;
     font-size: 14px;
+    opacity: 0;  /* Initially hidden */
+    transform: translateY(10px);  /* Moves text slightly down */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.back-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.back-button:hover {
-    background-color: #0056b3;
+/* Show <p> text only on hover */
+.gallery-item:hover p {
+    opacity: 1;
+    transform: translateY(0);
 }

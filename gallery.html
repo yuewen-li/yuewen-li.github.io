@@ -43,12 +43,12 @@
                 {src: "img/Portugal/3.JPG", text: "We visited a port producer in Duoro Valley. This is a lovely view of the valley through a window."}
             ],
             "Japan": [
-                {src: "img/Japan/1.JPG", text: ""},
-                {src: "img/Japan/2.JPG", text: ""},
-                {src: "img/Japan/3.JPG", text: ""},
-                {src: "img/Japan/4.JPG", text: ""},
-                {src: "img/Japan/5.JPG", text: ""},
-                {src: "img/Japan/6.JPG", text: ""}
+                {src: "img/Japan/1.JPG", text: "I took this picture at Susono train station. Mount Fuji was just there, watching me peacefully."},
+                {src: "img/Japan/2.JPG", text: "We stayed at a Ryokan in Susono. It was one of the best places I've stayed."},
+                {src: "img/Japan/3.JPG", text: "Watch out for the deers in Nara as they may attack you for food!"},
+                {src: "img/Japan/4.JPG", text: "Cat cafe in Osaka"},
+                {src: "img/Japan/5.JPG", text: "Yakitori restaurant in Hiroshima"},
+                {src: "img/Japan/6.JPG", text: "Setonaikai"}
             ],
             "Italy": [
                 {src: "img/Italy/1.JPG", text: "Well people say, when in Rome, do what tourists do. So here we are, Trevi Fountain."},
@@ -113,14 +113,14 @@
 
             let imgElement = document.createElement('img');
             imgElement.src = imageData.src;
-            imgElement.alt = imageData.text;
 
-            let overlay = document.createElement('div');
-            overlay.classList.add('overlay');
-            overlay.textContent = imageData.text;
+            let caption = document.createElement('p');
+            caption.classList.add('caption');
+            caption.textContent = imageData.text;
 
             divElement.appendChild(imgElement);
-            divElement.appendChild(overlay);
+            divElement.appendChild(caption);
+            
             galleryContainer.appendChild(divElement);
         });
         } else {
