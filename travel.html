@@ -41,7 +41,7 @@
 
     var visitedCountries = ["USA", "FRA", "JPN", "PRT", "DEU", "ITA", "CHN", "BGR", "PHL", "GBR", "ISL", "CHE", "ESP", "THA"]; 
 
-    fetch("countries.geojson")
+    fetch("countries-simple.geojson")
         .then(response => response.json())
         .then(data => {
             L.geoJSON(data, {
