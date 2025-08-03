@@ -3,8 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Country Gallery</title>
-    <link rel="stylesheet" href="css/main.css">
+    <title>Country Gallery - Dynamic</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        .loading {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 20px;
+            color: #d32f2f;
+            background: #ffebee;
+            border-radius: 8px;
+            margin: 20px;
+        }
+        
+        .photo-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .photo-info {
+            opacity: 1;
+        }
+        
+        .photo-date {
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 5px;
+        }
+        
+        .upload-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -16,120 +68,159 @@
         </ul>
     </nav>
 
-<h2>Gallery for <span id="country-name">Loading...</span></h2>
+    <h2>Gallery for <span id="country-name">Loading...</span></h2>
+    
+    <div id="upload-status" class="upload-status">
+        New photos uploaded! Refreshing gallery...
+    </div>
 
-<div id="gallery"></div>
+    <div id="gallery"></div>
+    <div id="loading" class="loading">Loading photos...</div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Retrieve country name from the URL
-        var urlParams = new URLSearchParams(window.location.search);
-        var country = urlParams.get('country');
-        console.log(country);  // Log the country name to check
-        document.getElementById('country-name').textContent = country || "Unknown Country";
+    <script>
+        // Configuration - Update this URL to your Google Drive JSON file
+        const PHOTO_DATA_URL = 'https://drive.google.com/file/d/1EQBlDXZ9uBfZU1TPgDpJ--eM_1x0gzsB/view?usp=drive_link';
+        
+        let photoData = null;
+        let currentCountry = null;
 
-        // Example image paths for different countries
-        var galleries = {
-            "France": [
-                {src: "img/France/loire.png", text: "Loire valley cycling trip - June 24"},
-                {src: "img/France/1.JPG", text: "Le Chateau de Chenonceau. This is a castle over a river. We visited it during our cycling trip in the Loire Valley."},
-                {src: "img/France/2.jpg", text: "Nice"},
-                {src: "img/France/3.jpg", text: "Nice at night"},
-                {src: "img/France/4.jpg", text: "Basilique du Sacre-Coeur de Montmartre"},
-                {src: "img/France/5.jpg", text: ""},
-                {src: "img/France/6.JPG", text: "Crepe with caramel sauce"}
-            ],
-            "Portugal": [
-                {src: "img/Portugal/algarve.png", text: "The Algarve cycling trip - Feb 25"},
-                {src: "img/Portugal/1.JPG", text: "Lagos, Algarve"},
-                {src: "img/Portugal/2.JPG", text: "Sao Vicente"},
-                {src: "img/Portugal/3.JPG", text: "We visited a port producer in Duoro Valley. This is a lovely view of the valley through a window."}
-            ],
-            "Japan": [
-                {src: "img/Japan/1.JPG", text: "I took this picture at Susono train station. Mount Fuji was just there, watching me peacefully."},
-                {src: "img/Japan/2.JPG", text: "We stayed at a Ryokan in Susono. It was one of the best places I've stayed."},
-                {src: "img/Japan/3.JPG", text: "Watch out for the deers in Nara as they may attack you for food!"},
-                {src: "img/Japan/4.JPG", text: "Cat cafe in Osaka"},
-                {src: "img/Japan/5.JPG", text: "Yakitori restaurant in Hiroshima"},
-                {src: "img/Japan/6.JPG", text: "Setonaikai"}
-            ],
-            "Italy": [
-                {src: "img/Italy/1.JPG", text: "Well people say, when in Rome, do what tourists do. So here we are, Trevi Fountain."},
-                {src: "img/Italy/2.JPG", text: "Colosseo"},
-                {src: "img/Italy/3.JPG", text: "Colosseo at night. Felt like I was walking in the film La Grande Bellezza."}
-            ],
-            "United States of America": [
-                {src: "img/United States of America/1.JPG", text: "We saw a lot of 6 toed cats at the Hemingway Museum in Key West."},
-                {src: "img/United States of America/2.jpg", text: "I learned about the differences between alligators and crocodiles. I kid you not this is an alligator."},
-                {src: "img/United States of America/3.JPG", text: "What a beautiful sunset!"}
-            ],
-            "Philippines": [
-                {src: "img/Philippines/1.jpg", text: ""},
-                {src: "img/Philippines/2.jpg", text: ""},
-                {src: "img/Philippines/3.jpg", text: ""}
-            ],
-            "Iceland": [
-                {src: "img/Iceland/1.jpg", text: ""},
-                {src: "img/Iceland/2.jpg", text: ""},
-                {src: "img/Iceland/3.jpg", text: ""}
-            ],
-            "Spain": [
-                {src: "img/Spain/1.jpg", text: ""},
-                {src: "img/Spain/2.jpg", text: ""},
-            ],
-            "United Kingdom": [
-                {src: "img/United Kingdom/0.JPG", text: "About to land at London Heathrow, throught the window I could see the sun about to rise above the horizon. Little did I know that was the start of a new adventure."},
-                {src: "img/United Kingdom/1.JPG", text: ""},
-                {src: "img/United Kingdom/2.JPG", text: ""},
-                {src: "img/United Kingdom/3.JPG", text: ""},
-                {src: "img/United Kingdom/4.JPG", text: "Lake district"},
-                {src: "img/United Kingdom/5.JPG", text: ""},
-                {src: "img/United Kingdom/6.JPG", text: ""},
-                {src: "img/United Kingdom/8.JPG", text: "Bath"},
-                {src: "img/United Kingdom/9.JPG", text: ""},
-            ],
-            "Germany": [
-                {src: "img/Germany/1.JPG", text: ""},
-                {src: "img/Germany/2.JPG", text: ""},
-                {src: "img/Germany/3.JPG", text: ""},
-                {src: "img/Germany/4.JPG", text: ""},
-            ],
-            "China": [
-                {src: "img/China/1.JPG", text: "Terracotta Army"},
-                {src: "img/China/2.JPG", text: "Chong Qing"},
-                {src: "img/China/3.JPG", text: "Hong Kong"},
-                {src: "img/China/5.JPG", text: "Ice scupture in Harbin"},
-                {src: "img/China/6.JPG", text: "Jing Shan, Beijing. From the top of the hill you can get a (good?) view of the Forbidden city."},
-                {src: "img/China/7.JPG", text: "A rafting trip in Kunming, Yunnan."},
-                {src: "img/China/8.JPG", text: ""},
-            ]
-            // Add more countries and images here as needed
-        };
-
-        // Populate gallery based on the country
-        var galleryContainer = document.getElementById('gallery');
-        if (galleries[country]) {
-            galleries[country].forEach(imageData => {
-            let divElement = document.createElement('div');
-            divElement.classList.add('gallery-item');
-
-            let imgElement = document.createElement('img');
-            imgElement.src = imageData.src;
-
-            let caption = document.createElement('p');
-            caption.classList.add('caption');
-            caption.textContent = imageData.text;
-
-            divElement.appendChild(imgElement);
-            divElement.appendChild(caption);
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get country from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            currentCountry = urlParams.get('country');
             
-            galleryContainer.appendChild(divElement);
+            if (!currentCountry) {
+                showError("No country specified");
+                return;
+            }
+            
+            document.getElementById('country-name').textContent = currentCountry;
+            
+            // Load photo data
+            loadPhotoData();
         });
-        } else {
-            galleryContainer.innerHTML = "<p>No images available for this country...yet</p>";
-        }
-    });
-</script>
 
+        async function loadPhotoData() {
+            try {
+                const response = await fetch(PHOTO_DATA_URL);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                photoData = await response.json();
+                displayPhotos();
+                
+            } catch (error) {
+                console.error("Error loading photo data:", error);
+                showError("Failed to load photos. Please try again later.");
+            }
+        }
+
+        function displayPhotos() {
+            const galleryContainer = document.getElementById('gallery');
+            const loadingElement = document.getElementById('loading');
+            
+            loadingElement.style.display = 'none';
+            
+            if (!photoData || !photoData[currentCountry]) {
+                galleryContainer.innerHTML = `
+                    <div class="error">
+                        <p>No photos available for ${currentCountry} yet.</p>
+                        <p>Upload photos to the "${currentCountry}" folder in Google Drive to see them here!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const countryPhotos = photoData[currentCountry];
+            galleryContainer.innerHTML = '';
+            
+            countryPhotos.forEach(photo => {
+                const photoElement = createPhotoElement(photo);
+                galleryContainer.appendChild(photoElement);
+            });
+        }
+
+        function createPhotoElement(photo) {
+            const div = document.createElement('div');
+            div.className = 'gallery-item';
+            
+            const img = document.createElement('img');
+            img.src = photo.thumbnailUrl || photo.url;
+            img.alt = photo.caption || photo.name;
+            img.loading = 'lazy'; // Enable lazy loading
+            
+            // Add error handling for images
+            img.onerror = function() {
+                this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmNWY1Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIG5vdCBhdmFpbGFibGU8L3RleHQ+PC9zdmc+';
+            };
+            
+            const photoInfo = document.createElement('div');
+            photoInfo.className = 'photo-info';
+            
+            const caption = document.createElement('div');
+            caption.textContent = photo.caption || photo.name;
+            
+            const date = document.createElement('div');
+            date.className = 'photo-date';
+            const uploadDate = new Date(photo.uploadDate);
+            date.textContent = `Uploaded: ${uploadDate.toLocaleDateString()}`;
+            
+            photoInfo.appendChild(caption);
+            photoInfo.appendChild(date);
+            
+            div.appendChild(img);
+            div.appendChild(photoInfo);
+            
+            // Add click handler to open full image
+            div.addEventListener('click', () => {
+                window.open(photo.url, '_blank');
+            });
+            
+            return div;
+        }
+
+        function showError(message) {
+            const galleryContainer = document.getElementById('gallery');
+            const loadingElement = document.getElementById('loading');
+            
+            loadingElement.style.display = 'none';
+            galleryContainer.innerHTML = `<div class="error">${message}</div>`;
+        }
+
+        // Function to check for new photos (can be called periodically)
+        async function checkForNewPhotos() {
+            try {
+                const response = await fetch(PHOTO_DATA_URL + '?t=' + Date.now());
+                const newPhotoData = await response.json();
+                
+                if (JSON.stringify(newPhotoData) !== JSON.stringify(photoData)) {
+                    photoData = newPhotoData;
+                    displayPhotos();
+                    showUploadStatus();
+                }
+            } catch (error) {
+                console.error("Error checking for new photos:", error);
+            }
+        }
+
+        function showUploadStatus() {
+            const status = document.getElementById('upload-status');
+            status.style.display = 'block';
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 3000);
+        }
+
+        // Check for new photos every 5 minutes
+        setInterval(checkForNewPhotos, 5 * 60 * 1000);
+        
+        // Also check when the page becomes visible
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                checkForNewPhotos();
+            }
+        });
+    </script>
 </body>
-</html>
+</html> 
