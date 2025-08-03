@@ -36,6 +36,39 @@
   ],
   "China": [
     {
+      "id": "1_o_QW5ng9lCn7AfUADDwm0D4FTYXEiQj",
+      "name": "JiuZhaiGou.jpg",
+      "url": "https://drive.google.com/uc?export=view&id=1_o_QW5ng9lCn7AfUADDwm0D4FTYXEiQj",
+      "thumbnailUrl": "https://drive.google.com/thumbnail?id=1_o_QW5ng9lCn7AfUADDwm0D4FTYXEiQj&sz=w400",
+      "caption": "JiuZhaiGou",
+      "uploadDate": "2025-08-03T17:39:32.197Z",
+      "lastModified": "2025-08-03T17:41:08.298Z",
+      "size": 3356805,
+      "mimeType": "image/heif"
+    },
+    {
+      "id": "11BsskCdVWA4BPXG2lJ2Lcty_IAQMQar5",
+      "name": "HuangLong.jpg",
+      "url": "https://drive.google.com/uc?export=view&id=11BsskCdVWA4BPXG2lJ2Lcty_IAQMQar5",
+      "thumbnailUrl": "https://drive.google.com/thumbnail?id=11BsskCdVWA4BPXG2lJ2Lcty_IAQMQar5&sz=w400",
+      "caption": "HuangLong",
+      "uploadDate": "2025-08-03T17:39:27.369Z",
+      "lastModified": "2025-08-03T17:40:50.764Z",
+      "size": 1165721,
+      "mimeType": "image/heif"
+    },
+    {
+      "id": "1svXoNQdY1LSI_4ASuwdj1auuo3r2LLCB",
+      "name": "Sichuan.jpg",
+      "url": "https://drive.google.com/uc?export=view&id=1svXoNQdY1LSI_4ASuwdj1auuo3r2LLCB",
+      "thumbnailUrl": "https://drive.google.com/thumbnail?id=1svXoNQdY1LSI_4ASuwdj1auuo3r2LLCB&sz=w400",
+      "caption": "Sichuan",
+      "uploadDate": "2025-08-03T17:39:23.226Z",
+      "lastModified": "2025-08-03T17:40:36.615Z",
+      "size": 853862,
+      "mimeType": "image/heif"
+    },
+    {
       "id": "1uuXA3VfrkcOxN87PcAGHRzAKJ6lCX1La",
       "name": "Yunnan.JPG",
       "url": "https://drive.google.com/uc?export=view&id=1uuXA3VfrkcOxN87PcAGHRzAKJ6lCX1La",
@@ -469,6 +502,50 @@
     }
   ],
   "Italy": [
+    {
+      "id": "1QImbxzTZWiHijF6pw_jYDlo0QGk4z6ja",
+      "name": "Amalfi.jpg",
+      "url": "https://drive.google.com/uc?export=view&id=1QImbxzTZWiHijF6pw_jYDlo0QGk4z6ja",
+      "thumbnailUrl": "https://drive.google.com/thumbnail?id=1QImbxzTZWiHijF6pw_jYDlo0QGk4z6ja&sz=w400",
+      "caption": "Amalfi",
+      "uploadDate": "2025-08-03T17:25:00.645Z",
+      "lastModified": "2025-08-03T17:28:34.675Z",
+      "size": 1903231,
+      "mimeType": "image/heif"
+    },
+    {
+      "id": "1VHoVE_fFgBgMCPTyHtSH1c4n31ZKZjlC",
+      "name": "Cat.jpg",
+      "url": "https://drive.google.com/uc?export=view&id=1VHoVE_fFgBgMCPTyHtSH1c4n31ZKZjlC",
+      "thumbnailUrl": "https://drive.google.com/thumbnail?id=1VHoVE_fFgBgMCPTyHtSH1c4n31ZKZjlC&sz=w400",
+      "caption": "Cat",
+      "uploadDate": "2025-08-03T17:24:57.086Z",
+      "lastModified": "2025-08-03T17:29:04.597Z",
+      "size": 2189142,
+      "mimeType": "image/heif"
+    },
+    {
+      "id": "1yZfiFSiYlZZibYHxT75rGa19dERTqePs",
+      "name": "Capri.jpg",
+      "url": "https://drive.google.com/uc?export=view&id=1yZfiFSiYlZZibYHxT75rGa19dERTqePs",
+      "thumbnailUrl": "https://drive.google.com/thumbnail?id=1yZfiFSiYlZZibYHxT75rGa19dERTqePs&sz=w400",
+      "caption": "Capri",
+      "uploadDate": "2025-08-03T17:24:49.308Z",
+      "lastModified": "2025-08-03T17:28:52.240Z",
+      "size": 965067,
+      "mimeType": "image/heif"
+    },
+    {
+      "id": "186RUPvDVg_qRw6lLIYZwxVEim3zoWUMK",
+      "name": "Mount Vesuvius.jpg",
+      "url": "https://drive.google.com/uc?export=view&id=186RUPvDVg_qRw6lLIYZwxVEim3zoWUMK",
+      "thumbnailUrl": "https://drive.google.com/thumbnail?id=186RUPvDVg_qRw6lLIYZwxVEim3zoWUMK&sz=w400",
+      "caption": "Mount Vesuvius",
+      "uploadDate": "2025-08-03T17:24:46.762Z",
+      "lastModified": "2025-08-03T17:29:14.939Z",
+      "size": 634662,
+      "mimeType": "image/heif"
+    },
     {
       "id": "1M7vsEy6O8TgFiRVOcrOskLrPE82Do7Bz",
       "name": "Colosseum at night.JPG",
