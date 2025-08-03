@@ -79,7 +79,7 @@
 
     <script>
         // Configuration - Update this URL to your Google Drive JSON file
-        const PHOTO_DATA_URL = "https://drive.google.com/file/d/1EQBlDXZ9uBfZU1TPgDpJ--eM_1x0gzsB/view?usp=drive_link";
+        const PHOTO_DATA_URL = "travel-photos-data.json";
         
         let photoData = null;
         let currentCountry = null;
@@ -188,39 +188,6 @@
             galleryContainer.innerHTML = `<div class="error">${message}</div>`;
         }
 
-        // Function to check for new photos (can be called periodically)
-        async function checkForNewPhotos() {
-            try {
-                const response = await fetch(PHOTO_DATA_URL + '?t=' + Date.now());
-                const newPhotoData = await response.json();
-                
-                if (JSON.stringify(newPhotoData) !== JSON.stringify(photoData)) {
-                    photoData = newPhotoData;
-                    displayPhotos();
-                    showUploadStatus();
-                }
-            } catch (error) {
-                console.error("Error checking for new photos:", error);
-            }
-        }
-
-        function showUploadStatus() {
-            const status = document.getElementById('upload-status');
-            status.style.display = 'block';
-            setTimeout(() => {
-                status.style.display = 'none';
-            }, 3000);
-        }
-
-        // Check for new photos every 5 minutes
-        setInterval(checkForNewPhotos, 5 * 60 * 1000);
-        
-        // Also check when the page becomes visible
-        document.addEventListener('visibilitychange', function() {
-            if (!document.hidden) {
-                checkForNewPhotos();
-            }
-        });
     </script>
 </body>
 </html> 
